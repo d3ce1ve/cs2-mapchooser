@@ -348,7 +348,11 @@ public class MapChooser : BasePlugin
             }, TimerFlags.STOP_ON_MAPCHANGE);
 
         _startTime = Server.CurrentTime;
-        _mapVoteTimer= AddTimer((timeLimitConVar.GetPrimitiveValue<float>() * 60f) - (_config.VoteStartTime * 60f),  StartMapVote, TimerFlags.STOP_ON_MAPCHANGE);
+        var voteDelay = (timeLimitConVar.GetPrimitiveValue<float>() * 60f) - (_config.VoteStartTime * 60f);
+        if (voteDelay < 1f)
+            voteDelay = 1f;  // Prevent instant vote
+        
+        _mapVoteTimer = AddTimer(voteDelay, StartMapVote, TimerFlags.STOP_ON_MAPCHANGE);
     }
 
     private void StartMapVote()
@@ -588,10 +592,13 @@ public class MapChooser : BasePlugin
     {
         var json = File.ReadAllText(_configPath);
         _config = JsonSerializer.Deserialize<Config>(json);
-
+    
         _maps = new List<string>(File.ReadLines(_mapsPath));
         if (_mapHistory.Count > _config.ExcludeMaps)
             _mapHistory.RemoveAt(0);
+    
+        // Ensure RTV is activated with one long round
+        AddTimer(1.0f, SetupTimeLimitCountDown);
     }
 
     public HookResult OnMatchEndEvent(EventCsWinPanelMatch @event, GameEventInfo info)
