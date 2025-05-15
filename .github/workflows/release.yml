@@ -18,7 +18,7 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Build DLL
-        run: dotnet publish MapChooser.csproj -c Release -o ./publish
+        run: dotnet publish ./MapChooser/MapChooser.csproj -c Release -o ./publish
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
