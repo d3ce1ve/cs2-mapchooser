@@ -1,16 +1,18 @@
-﻿{
-    "VoteStartTime": 3.0,
-    "AllowExtend": true,
-    "ExtendTimeStep": 10.0,
-    "ExtendLimit": 3,
-    "ExcludeMaps":  0,
-    "IncludeMaps": 5,
-    "IncludeCurrent": false,
-    "DontChangeRTV": true,
-    "VoteDuration": 15.0,
-    "IgnoreSpec": true,
-    "AllowRtv": true,
-    "RTVPercent": 0.6,
-    "RTVDelay": 3.0,
-    "EnforceTimeLimit": true
+{
+  "VoteStartTime": 3.0,
+  "VoteStartTimeRound": 999,
+  "AllowExtend": true,
+  "ExtendTimeStep": 10.0,
+  "ExtendRoundStep": 10,
+  "ExtendLimit": 3,
+  "ExcludeMaps": 0,
+  "IncludeMaps": 5,
+  "IncludeCurrent": false,
+  "DontChangeRtv": true,
+  "VoteDuration": 30.0,
+  "IgnoreSpec": true,
+  "AllowRtv": true,
+  "RTVPercent": 0.6,
+  "RTVDelay": 0.0,
+  "EnforceTimeLimit": true
 }
