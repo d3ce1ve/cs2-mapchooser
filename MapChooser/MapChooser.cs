@@ -110,7 +110,7 @@ public class MapChooser : BasePlugin
                 var timeElapsed = Server.CurrentTime - _startTime;
 
                 var timeString = FormatTime(timeLimit - timeElapsed);
-                player.PrintToChat($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.timeleft", timeString]}");
+                player.PrintToChat($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.time_left", timeString]}");
             }
             return HookResult.Continue;
         });
@@ -134,7 +134,7 @@ public class MapChooser : BasePlugin
                 var timeElapsed = Server.CurrentTime - _startTime;
 
                 var timeString = FormatTime(timeLimit - timeElapsed);
-                player.PrintToChat($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.timeleft", timeString]}");
+                player.PrintToChat($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.time_left", timeString]}");
             }
             return HookResult.Continue;
         });
@@ -189,7 +189,7 @@ public class MapChooser : BasePlugin
         var timeElapsed = Server.CurrentTime - _startTime;
 
         var timeString = FormatTime(timeLimit - timeElapsed);
-        cmd.ReplyToCommand($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.timeleft", timeString]}");
+        cmd.ReplyToCommand($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.time_left", timeString]}");
     }
     
     private static string FormatTime(float timeF)
@@ -212,7 +212,7 @@ public class MapChooser : BasePlugin
         if (hours > 0)
             time.Append($"{hours:00}:");
         time.Append($"{mins:00}:");
-        time.Append($"{seconds:00}.");
+        time.Append($"{seconds:00}");
 
         return time.ToString();
     }
@@ -377,7 +377,7 @@ public class MapChooser : BasePlugin
             while (nextMap.Count < _config.IncludeMaps)
             {
                 if (voteMaps.Count == 0) break;
-                var index = random.Next(0, voteMaps.Count - 1);
+                var index = random.Next(voteMaps.Count);
                 nextMap.Add(voteMaps[index]);
                 voteMaps.RemoveAt(index);
             }
@@ -408,7 +408,7 @@ public class MapChooser : BasePlugin
         for (var i = 0; i < _config.IncludeMaps; i++)
         {
             if (nextMap.Count == 0) break;
-            var index = random.Next(0, nextMap.Count - 1);
+            var index = random.Next(nextMap.Count);
             var map = nextMap.ElementAt(index).Replace("ws:", "").Trim();
             nextMap.RemoveAt(index);
             number++;
@@ -579,7 +579,7 @@ public class MapChooser : BasePlugin
         {
             nextMap = nextMap.Where(map => !_mapHistory.Contains(map.Replace("ws:", "").Trim()) && !_nominations.Values.Contains(map.Replace("ws:", "").Trim())).ToList();
         }
-        _nextMap = nextMap.ElementAt(random.Next(0, nextMap.Count - 1)).Replace("ws:", "");
+        _nextMap = nextMap.ElementAt(random.Next(nextMap.Count)).Replace("ws:", "");
         Server.PrintToChatAll($"{Localizer["mapchooser.prefix"]} {Localizer["mapchooser.map_won", _nextMap]}");
         if(_config.EnforceTimeLimit)
         {
