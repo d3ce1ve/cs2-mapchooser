@@ -27,7 +27,7 @@ public class Config
     public int ExcludeMaps { get; set; } = 0;
     public int IncludeMaps { get; set; } = 5;
     public bool IncludeCurrent { get; set; } = false;
-    [JsonPropertyName("DontChangeRTV")]
+    [JsonPropertyName("DontChangeRtv")]
     public bool DontChangeRtv { get; set; } = true;
     public float VoteDuration { get; set; } = 15f;
     // TODO: Add in run off voting
