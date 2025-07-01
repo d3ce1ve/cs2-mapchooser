@@ -15,5 +15,5 @@
   "mapchooser.option_extend": "Extend",
   "mapchooser.voted_for": "{green}{0}{default} has voted for {green}{1}{default}.",
   "mapchooser.map_won": "{green}{0}{default}  has been chosen as the next map.",
-  "mapchooser.time_left": "Time left {green}{0}"
+  "mapchooser.timeleft": "Time left {green}{0}"
 }
